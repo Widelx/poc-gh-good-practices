@@ -26,7 +26,7 @@ jobs:
         id: cz
         run: |
           echo "version=$(cz version --short)" >> $GITHUB_OUTPUT
-          z --no-raise 21 bump --yes --changelog --changelog-to-stdout --dry-run >> $GITHUB_OUTPUT
+          cz --no-raise 21 bump --yes --changelog --changelog-to-stdout --dry-run >> $GITHUB_OUTPUT
         # uses: commitizen-tools/commitizen-action@master
         # with:
         #   github_token: ${{ secrets.GITHUB_TOKEN }}
