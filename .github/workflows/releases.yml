@@ -25,14 +25,15 @@ jobs:
 
       - name: Bump version
         id: cz
-        # run: |
-        #   echo "version=$(cz version --short)" >> $GITHUB_OUTPUT
-        #   cz --no-raise 21 bump --yes --changelog --changelog-to-stdout --dry-run >> $GITHUB_OUTPUT
-        uses: commitizen-tools/commitizen-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          changelog_increment_filename: CHANGELOG.md
-          changelog: false
+        run: |
+          pip install commitizen
+          echo "version=$(cz version --short)" >> $GITHUB_OUTPUT
+          cz --no-raise 21 bump --yes --changelog --changelog-to-stdout --dry-run >> $GITHUB_OUTPUT
+        # uses: commitizen-tools/commitizen-action@master
+        # with:
+        #   github_token: ${{ secrets.GITHUB_TOKEN }}
+        #   changelog_increment_filename: CHANGELOG.md
+        #   changelog: false
 
       - name: Create GitHub Release
         if: steps.cz.outputs.version != ''
