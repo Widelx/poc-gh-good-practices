@@ -25,15 +25,15 @@ jobs:
 
       - name: Bump version
         id: cz
-        run: |
-          pip install commitizen
-          cz bump --yes -- --dry-run
+        # run: |
+          # pip install commitizen
+          # cz bump --yes -- --dry-run
         # echo "version=$(cz version --short)" >> $GITHUB_OUTPUT
-        # uses: commitizen-tools/commitizen-action@master
-        # with:
-        #   github_token: ${{ secrets.GITHUB_TOKEN }}
-        #   changelog_increment_filename: CHANGELOG.md
-        #   changelog: false
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          changelog_increment_filename: CHANGELOG.md
+          changelog: false
 
       - name: Create GitHub Release
         if: steps.cz.outputs.version != ''
