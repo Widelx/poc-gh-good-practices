@@ -27,8 +27,8 @@ jobs:
         id: cz
         run: |
           pip install commitizen
-          # echo "version=$(cz version --short)" >> $GITHUB_OUTPUT
           cz bump --yes -- --dry-run
+        # echo "version=$(cz version --short)" >> $GITHUB_OUTPUT
         # uses: commitizen-tools/commitizen-action@master
         # with:
         #   github_token: ${{ secrets.GITHUB_TOKEN }}
