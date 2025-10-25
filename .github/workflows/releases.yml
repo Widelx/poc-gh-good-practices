@@ -1,0 +1,39 @@
+name: Release with Commitizen
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write   # needed to push tags & changelog
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    container:
+      image: python:3.12
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history
+
+      - name: Bump version
+        id: cz
+        uses: commitizen-tools/commitizen-action@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          changelog_increment_filename: CHANGELOG.md
+          push: true  # automatically push version + tags to main
+
+      - name: Create GitHub Release
+        if: steps.cz.outputs.version != ''
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.cz.outputs.version }}
+          name: ${{ steps.cz.outputs.version }}
+          body_path: CHANGELOG.md
