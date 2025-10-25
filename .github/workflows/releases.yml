@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0  # Full history
 
@@ -26,9 +26,9 @@ jobs:
         id: cz
         uses: commitizen-tools/commitizen-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           changelog_increment_filename: CHANGELOG.md
-          push: true  # automatically push version + tags to main
+          no_raise: 21
 
       - name: Create GitHub Release
         if: steps.cz.outputs.version != ''
