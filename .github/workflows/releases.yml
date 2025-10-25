@@ -33,8 +33,6 @@ jobs:
           changelog_increment_filename: CHANGELOG.md
           # no_raise: false
           changelog: false
-          # changelog_increment_filename: true
-
 
       - name: Create GitHub Release
         if: steps.cz.outputs.version != ''
