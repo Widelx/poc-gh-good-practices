@@ -32,7 +32,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           changelog_increment_filename: CHANGELOG.md
           # no_raise: 21
-          tags: true
+          # tags: true
 
 
       - name: Create GitHub Release
